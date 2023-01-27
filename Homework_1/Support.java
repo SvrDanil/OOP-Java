@@ -1,14 +1,38 @@
-public class Support extends BaseHero{
+import java.util.ArrayList;
 
-    int mana;
-    
-
-    public Support(String name, String role, int attack, int defence, int[] damage, int health, int speed,int mana) 
-    {
-        super(name, role, attack, defence, damage, health, speed);
-        this.mana=mana;
+public class Support extends BaseHero {
+    Integer mana;
+    public Support (String name,String role, int attack, int defence, int[] damage, int maxHealth, int speed, int mana) {
+        super(name, role, attack, defence, damage, maxHealth, speed);
+        this.mana = mana;
     }
+
+    @Override
     public String toString() {
-        return super.toString() + ", Mana: "+ mana;
+        return super.toString() + ", Mana";
+    }
+
+    @Override
+    public void step(ArrayList<BaseHero> heroList) {
+        double minHealth = 1.0;
+        int minHealthInd = 0;
+        for (int i = 0; i < heroList.size(); i++) {
+            BaseHero hero = heroList.get(i);
+            double healthShare = (double) hero.health / (double) hero.maxHealth;
+            if (healthShare < minHealth) {
+                minHealth = healthShare;
+                minHealthInd = i;
+            }
+        }
+
+        BaseHero weakHero = heroList.get(minHealthInd);
+        int wound = weakHero.maxHealth - weakHero.health;
+        if (wound <= -this.damage[0]) {
+            weakHero.health = maxHealth;
+        } else {
+            weakHero.health -= this.damage[0];
+        }
+
+        System.out.println();
     }
 }

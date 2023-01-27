@@ -1,79 +1,64 @@
 import java.util.ArrayList;
-
-
+import java.util.Random;
 public class Main {
 
-    public static void main(String[] args) { 
-        
-        ArrayList<BaseHero> peasant = new ArrayList<>();
-        String[] peasantNames = {"Имя1", "Имя2", "Имя3", "Имя4", "Имя5"};
-        for (String name : peasantNames) {
-            peasant.add(new Peasant(name));
-        }
-        for (BaseHero character : peasant) {
-            System.out.println(character);
-        }
-        System.out.println("====================");
+    public static void main(String[] args) {
 
-        ArrayList<BaseHero> rogue = new ArrayList<>();
-        String[] rogueNames = {"Имя1", "Имя2", "Имя3", "Имя4", "Имя5"};
-        for (String name : rogueNames) {
-            rogue.add(new Rogue(name));
-        }
-        for (BaseHero character : rogue) {
-            System.out.println(character);
-        }
-        System.out.println("====================");
+        ArrayList<BaseHero> heroesOne = new ArrayList<>();
+        ArrayList<BaseHero> heroesTwo = new ArrayList<>();
+        String[] names = {"Михаил", "Александр", "Пётр", "Андрей", "Илья",
+                "Заурбек", "Селиван", "Олег", "Поликарп", "Яков", "Иаков",
+                "Антон", "Алексей", "Андрей", "Алек", "Алекс", "Аркадий",
+                "Борис", "Бениамин", "Варлам", "Вениамин", "Виктор", "Ванадий",
+                "Варис", "Геннадий", "Григорий", "Георгий", "Дмитрий", "Дарий",
+                "Даниил", "Данил", "Дан", "Евгений", "Евстратий", "Евтихий"};
 
-        ArrayList<BaseHero> sniper = new ArrayList<>();
-        String[] sniperNames = {"Имя1", "Имя2", "Имя3", "Имя4", "Имя5"};
-        for (String name : sniperNames) {
-            sniper.add(new Sniper(name));
-        }
-        for (BaseHero character : sniper) {
-            System.out.println(character);
-        }
-        System.out.println("====================");
+        Random rand = new Random();
 
-        ArrayList<BaseHero> crossbowman = new ArrayList<>();
-        String[] crossbowmanNames = {"Имя1", "Имя2", "Имя3", "Имя4", "Имя5"};
-        for (String name : crossbowmanNames) {
-            crossbowman.add(new Crossbowman(name));
+        for (int i = 0; i < 10; i++) {
+            int randNum = rand.nextInt(4);
+            int randNameNum = rand.nextInt(names.length);
+            if (randNum == 0) {
+                heroesOne.add(new Peasant(names[randNameNum]));
+            } else if (randNum == 1) {
+                heroesOne.add(new Rogue(names[randNameNum]));
+            } else if (randNum == 2) {
+                heroesOne.add(new Sniper(names[randNameNum]));
+            } else {
+                heroesOne.add(new Wizzard(names[randNameNum]));
+            }
         }
-        for (BaseHero character : crossbowman) {
-            System.out.println(character);
-        }
-        System.out.println("====================");
+        heroesOne.forEach(n -> System.out.print(n.getInfo() + ", "));
+        heroesOne.forEach(n -> n.step(heroesOne));
+        heroesOne.forEach(n -> System.out.print(n.getInfo() + ", "));
 
-        ArrayList<BaseHero> spearman = new ArrayList<>();
-        String[] spearmanNames = {"Имя1", "Имя2", "Имя3", "Имя4", "Имя5"};
-        for (String name : spearmanNames) {
-            spearman.add(new Spearman(name));
-        }
-        for (BaseHero character : spearman) {
-            System.out.println(character);
-        }
-        System.out.println("====================");
+        System.out.println("\n\n***\n");
 
-        ArrayList<BaseHero> wizzard = new ArrayList<>();
-        String[] wizzardNames = {"Имя1", "Имя2", "Имя3", "Имя4", "Имя5"};
-        for (String name : wizzardNames) {
-            wizzard.add(new Wizzard(name));
+        for (int i = 0; i < 10; i++) {
+            int randNum = rand.nextInt(4);
+            int randNameNum = rand.nextInt(names.length);
+            if (randNum == 0) {
+                heroesTwo.add(new Peasant(names[randNameNum]));
+            } else if (randNum == 1) {
+                heroesTwo.add(new Spearman(names[randNameNum]));
+            } else if (randNum == 2) {
+                heroesTwo.add(new Crossbowman(names[randNameNum]));
+            } else {
+                heroesTwo.add(new Monk(names[randNameNum]));
+            }
         }
-        for (BaseHero character : wizzard) {
-            System.out.println(character);
-        }
-        System.out.println("====================");
+        heroesTwo.forEach(n -> System.out.print(n.getInfo() + ", "));
+        heroesOne.forEach(n -> n.step(heroesTwo));
+        heroesTwo.forEach(n -> System.out.print(n.getInfo() + ", "));
+    }
 
-        ArrayList<BaseHero> monk = new ArrayList<>();
-        String[] monkNames = {"Имя1", "Имя2", "Имя3", "Имя4", "Имя5"};
-        for (String name : monkNames) {
-            monk.add(new Monk(name));
+    public static void getHeroes(ArrayList<BaseHero> heroes, String requiredClass) {
+        int count = 0;
+        for (BaseHero hero : heroes) {
+            if (hero.toString().contains(requiredClass)) {
+                count++;
+                System.out.println(count + ". " + hero);
+            }
         }
-        for (BaseHero character : monk) {
-            System.out.println(character);
-        }
-        System.out.println("====================");
-    
     }
 }
