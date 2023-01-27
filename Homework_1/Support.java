@@ -28,11 +28,11 @@ public class Support extends BaseHero {
         BaseHero weakHero = heroList.get(minHealthInd);
         int wound = weakHero.maxHealth - weakHero.health;
         if (wound <= -this.damage[0]) {
-            weakHero.health = maxHealth;
+            weakHero.health = weakHero.maxHealth;
         } else {
             weakHero.health -= this.damage[0];
         }
 
-        System.out.println();
+    
     }
 }
