@@ -1,3 +1,4 @@
+
 public class Sniper extends Ranged{
     
 
